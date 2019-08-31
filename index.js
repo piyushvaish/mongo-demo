@@ -66,5 +66,38 @@ async function getCourses(){
   console.log(courses);
 }
 
-getCourses();
+//getCourses();
 //createCourse();
+
+
+// Updating a document
+async function updateCourse(id){
+    //const course = await Course.findById(id);
+
+    // If we want to update the documents without getting the user input ?
+    const result = await Course.update({ _id :id},{
+        $set:{
+            author : 'Mosh',
+            isPublished : false
+        }
+    });
+    console.log(result);
+
+    // const course = await Course.update({isPublished : false}) // This will update all courses which are not published.
+    // if (!course)return;
+    // course.set({
+    //     isPublished : true,
+    //     author: 'Another Author'
+    // });
+    // const result = await course.save();
+    //console.log(result);
+}
+//updateCourse('5d62578112329fdc7e6a5012');
+
+//Deleting a Document
+async function deleteDocument(id){
+    const result = await Course.deleteOne({_id:id});
+    // If we replace id by isPublished : true, then there would be multiple docs returned but it will delete the first document.
+    console.log(result);
+}
+deleteDocument('5d62578112329fdc7e6a5012');
